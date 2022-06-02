@@ -154,4 +154,49 @@ departamento_procedencia = data['Nombre departamento'].value_counts()
 print(f'Número de contagiados por departamento de procedencia: \n{departamento_procedencia}')
 
 
+# 21.Liste de mayor a menor las fechas donde se presentaron mas contagios
+
+fechas_mas_contagios = data['Fecha de diagnóstico' ].value_counts().sort_values(ascending=False)
+print(f'Fechas donde se presentaron mas contagios:\n{fechas_mas_contagios}')
+
+
+# 22.Diga cual es la tasa de mortalidad y recuperación que tiene toda Colombia
+
+cantidad_muertes = data[data['Estado'] == 'Fallecido'].shape[0]
+cantidad_recuperados = data[data['Recuperado'] == 'Recuperado'].shape[0]
+
+tasa_mortalidad = cantidad_muertes / numero_casos * 100
+tasa_recuperacion = cantidad_recuperados / numero_casos * 100
+
+print(f'Tasa de mortalidad en Colombia: {tasa_mortalidad}')
+print(f'Tasa de recuperacion en Colombia: {tasa_recuperacion}')
+
+
+# 23. Liste la tasa de mortalidad y recuperación que tiene cada departamento
+
+muertes_departamento = data[data['Estado'] == 'Fallecido'].groupby('Nombre departamento').size()
+tasa_mortalidad_dpto = muertes_departamento /  numero_casos * 100
+print(f'Tasa de mortalidad de cada departamento:\n{tasa_mortalidad_dpto}')
+
+recuperacion_departamento = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre departamento').size()
+tasa_recuperacion_dpto = recuperacion_departamento /  numero_casos * 100
+print(f'Tasa de recuperacion de cada departamento:\n{tasa_recuperacion_dpto}')
+
+
+# 24.Liste la tasa de mortalidad y recuperación que tiene cada ciudad
+
+muertes_municipio = data[data['Estado'] == 'Fallecido'].groupby('Nombre municipio').size()
+tasa_mortalidad_munic = muertes_municipio /  numero_casos * 100
+print(f'Tasa de mortalidad de cada municipio:\n{tasa_mortalidad_munic}')
+
+recuperacion_municipio = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre municipio').size()
+tasa_recuperacion_munic = recuperacion_municipio /  numero_casos * 100
+print(f'Tasa de recuperacion de cada municipio:\n{tasa_recuperacion_munic}')
+
+
+# 25.Liste por cada ciudad la cantidad de personas por atención
+
+cantidad_atencion = data.groupby(['Nombre municipio', 'Ubicación del caso']).size()
+print(f'Cantidad de personas por atención:\n{cantidad_atencion}')
+
 

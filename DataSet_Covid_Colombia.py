@@ -267,3 +267,38 @@ fallecidos = data[data['Estado'] == 'Fallecido'].groupby('Edad').size().sort_val
 print(f'Cantidad de fallecidos por edad en toda Colombia:\n{fallecidos}')
 
 
+# 31.Liste el porcentaje de personas por atención de toda Colombia
+
+porcentaje_personas= ((data.groupby('Ubicación del caso').size().sort_values(ascending = False)) / ((data.groupby('Ubicación del caso').size().sort_values(ascending = False)).sum())) * 100
+print(f'Porcentaje de personas por atención de toda Colombia\n {porcentaje_personas}')
+
+
+# 32.Haga un gráfico de barras por atención de toda Colombia
+
+data.groupby(['Ubicación del caso']).size().sort_values(ascending = False).plot(kind='bar')
+plt.ylabel('Cantidad de personas')
+print('\n Gráfico de barras por atención de toda Colombia')
+
+
+# 33.Haga un gráfico de barras por Sexo de toda Colombia
+
+data.groupby(['Sexo']).size().sort_values(ascending = False).plot(kind='bar')
+print('\n Grafico de barras por sexo de toda Colombia')
+
+
+# 34.Haga un gráfico de barras por tipo de toda Colombia
+
+data.groupby(['Tipo de contagio']).size().sort_values(ascending = False).plot(kind='bar')
+print('\n Grafico de barras por tipo de contagio de toda Colombia')
+
+
+# 35. Haga un gráfico de barras del número de contagiados, recuperados y fallecidos por fecha de toda Colombia
+
+data.groupby('Fecha de diagnóstico').size().plot(kind = 'bar')
+Fallecidos = data[data['Ubicación del caso'] == 'Fallecido']
+Fallecidos.groupby('Fecha de diagnóstico').size().plot(kind = 'bar')
+Recuperado = data[data['Recuperado'] == 'Recuperado']
+Recuperado.groupby('Fecha de diagnóstico').size().plot(kind = 'bar')
+plt.legend(["Recuperados", "Fallecidos", "Contagiados"])
+print('\n Grafico de barras del número de contagiados, recuperados y fallecidos por fecha de toda Colombia')
+

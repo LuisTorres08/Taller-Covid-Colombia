@@ -91,5 +91,38 @@ print('*'*50)
 print(f'Tipo de atencion:\n{tipo_atencion}')
 
 
+# 11.Liste de mayor a menor los 10 departamentos con mas casos de contagiados
+
+departamentos_mas_casos = data['Nombre departamento' ].value_counts().head(10)
+print(f'Los 10 departamentos con mas caso de contagiados son:\n{departamentos_mas_casos}')
+
+
+# 12.Liste de mayor a menor los 10 departamentos con mas casos de fallecidos
+
+aux = data[data['Estado'] == 'Fallecido'].groupby('Nombre departamento')
+departamentos_fallecidos = aux.size().sort_values(ascending=False).head(10)
+print(f'Los 10 departamentos con más casos casos de fallecidos son:\n{departamentos_fallecidos}')
+
+
+# 13.Liste de mayor a menor los 10 departamentos con mas casos de recuperados
+
+aux = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre departamento')
+departamentos_recuperados = aux.size().sort_values(ascending=False).head(10)
+print(f'Los 10 departamentos con más casos casos de recuperados son:\n{departamentos_recuperados}')
+
+
+# 14.Liste de mayor a menor los 10 municipios con mas casos de contagiados
+
+municipios_mas_casos = data['Nombre municipio' ].value_counts().head(10)
+print(f'Los 10 municipios con mas caso de contagiados son:\n{municipios_mas_casos}')
+
+
+# 15.Liste de mayor a menor los 10 municipios con mas casos de fallecidos
+
+aux = data[data['Estado'] == 'Fallecido'].groupby('Nombre municipio')
+municipios_fallecidos = aux.size().sort_values(ascending=False).head(10)
+print(f'Los 10 municipios con más casos casos de fallecidos son:\n{municipios_fallecidos}')
+
+
 
 

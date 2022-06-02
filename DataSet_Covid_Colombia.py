@@ -60,4 +60,36 @@ numero_recuperados = data[data['Recuperado'] == 'Recuperado'].shape[0]
 print(f'El numero de personas recuperadas es de: {numero_recuperados}')
 
 
+# 6. Número de personas que ha fallecido
+
+numero_fallecidos = data[data['Estado'] == 'Fallecido'].shape[0]
+print(f'El numero de personas que ha fallecidos es de: {numero_fallecidos}')
+
+
+# 7.Ordenar de Mayor a menor por tipo de caso (Importado, en estudio, Relacionado)
+
+tipo_caso = data['Tipo de contagio' ].value_counts().head()
+print(f'Tipo de caso:\n{tipo_caso}')
+
+
+# 8.Número de departamentos afectados
+
+numero_departamentos = data['Nombre departamento'].value_counts().count()
+print(f'El número de departamentos afectados es: {numero_departamentos}')
+
+
+# 9.Liste los departamentos afectados(sin repetirlos)
+
+departamentos_afectados = data['Nombre departamento'].value_counts()
+print(f'Departamentos afectados: {municipios_afectados}')
+
+
+# 10.Ordene de mayor a menor por tipo de atención
+
+tipo_atencion = data['Tipo de recuperación'].value_counts().head()
+print('*'*50)
+print(f'Tipo de atencion:\n{tipo_atencion}')
+
+
+
 

@@ -124,5 +124,34 @@ municipios_fallecidos = aux.size().sort_values(ascending=False).head(10)
 print(f'Los 10 municipios con más casos casos de fallecidos son:\n{municipios_fallecidos}')
 
 
+# 16.Liste de mayor a menor los 10 municipios con mas casos de recuperados
+
+aux = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre municipio')
+municipios_recuperados = aux.size().sort_values(ascending=False).head(10)
+print(f'Los 10 municipios con más casos casos de recuperados son:\n{municipios_recuperados}')
+
+
+# 17.Liste agrupado por departamento y en orden de Mayor a menor las ciudades con mas casos de contagiados
+
+dep_ciud_contagios = data.groupby(['Nombre departamento', 'Nombre municipio']).size().sort_values(ascending=False)
+print(f'Departamentos y sus ciudades con mas casos de contagios:\n{dep_ciud_contagios}')
+
+# 18.Número de Mujeres y hombres contagiados por ciudad por departamento
+
+numero_h_m_contagiados = data.groupby(['Sexo', 'Nombre municipio', 'Nombre departamento']).size().sort_values(ascending=False)
+print(f'Número de Mujeres y hombres contagiados por ciudad por departamento:\n{numero_h_m_contagiados}')
+
+
+# 19.Liste el promedio de edad de contagiados por hombre y mujeres por ciudad por departamento
+
+promedio_edad = data.groupby( ['Sexo', 'Nombre municipio', 'Nombre departamento']).Edad.mean()
+print(f'Promedio de edad de contagiados por hombre y mujeres por ciudad por departamento: \n{promedio_edad}')
+
+
+# 20.Liste de mayor a menor el número de contagiados por departamento de procedencia
+
+departamento_procedencia = data['Nombre departamento'].value_counts()
+print(f'Número de contagiados por departamento de procedencia: \n{departamento_procedencia}')
+
 
 

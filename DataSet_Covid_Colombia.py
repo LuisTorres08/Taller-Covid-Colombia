@@ -200,3 +200,70 @@ cantidad_atencion = data.groupby(['Nombre municipio', 'Ubicación del caso']).si
 print(f'Cantidad de personas por atención:\n{cantidad_atencion}')
 
 
+# 26.Liste el promedio de edad por sexo por cada ciudad de contagiados
+
+promedio_edad_sexo = data.groupby(['Sexo', 'Nombre municipio']).Edad.mean()
+print(f'Promedio de edad por sexo por cada ciudad de contagiados:\n{promedio_edad_sexo}')
+
+
+# 27. Grafique las curvas de contagio, muerte y recuperación de toda Colombia acumulados
+
+data.loc[data['Sexo'] == 'm'] = 'M'
+data.loc[data['Sexo'] == 'f'] = 'F'
+data.loc[data['Estado'] == 'leve'] = 'Leve'
+data.loc[data['Estado'] == 'LEVE'] = 'Leve'
+
+contagios = data.groupby('Fecha de diagnóstico').size().sort_values().plot(figsize=(15, 4))
+plt.show(contagios)
+print('\n Curva de Contagios')
+
+
+fallecidos = data[data['Estado'] == 'Fallecido'].groupby('Fecha de diagnóstico').size().sort_values().plot(figsize=(15, 4))
+plt.show(fallecidos)
+print('\n Curva de Fallecidos')
+
+recuperados = data[data['Recuperado'] == 'Recuperado'].groupby('Fecha de diagnóstico').size().sort_values().plot(figsize=(15, 4))
+plt.show(recuperados)
+print('\n Curva de Recuperados')
+
+
+# 28.Grafique las curvas de contagio, muerte y recuperación de los 10 departamentos con mas casos de contagiados acumulados
+
+contagios_dpto = data.groupby('Nombre departamento').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(contagios_dpto)
+print('\n Curva de los 10 departamentos con mas casos de contagiados')
+
+
+fallecidos_dpto = data[data['Estado'] == 'Fallecido'].groupby('Nombre departamento').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(fallecidos_dpto)
+print('\n Curva de los 10 departamentos con mas casos de fallecidos')
+
+
+recuperados_dpto = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre departamento').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(recuperados_dpto)
+print('\n Curva de los 10 departamentos con mas casos de recuperados')
+
+
+# 29.Grafique las curvas de contagio, muerte y recuperación de las 10 ciudades con mas casos de contagiados acumulados
+
+contagios_municipio = data.groupby('Nombre municipio').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(contagios_municipio)
+print('\n Curva de los 10 municipios con mas casos de contagiados')
+
+
+fallecidos_municipio = data[data['Estado'] == 'Fallecido'].groupby('Nombre municipio').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(fallecidos_municipio)
+print('\n Curva de los 10 municipios con mas casos de fallecidos')
+
+
+recuperados_municipio = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre municipio').size().sort_values(ascending=False).head(10).plot(figsize=(15, 4))
+plt.show(recuperados_municipio)
+print('\n Curva de los 10 municipios con mas casos de recuperados')
+
+
+# 30.Liste de mayor a menor la cantidad de fallecidos por edad en toda Colombia.
+
+fallecidos = data[data['Estado'] == 'Fallecido'].groupby('Edad').size().sort_values(ascending = False)
+print(f'Cantidad de fallecidos por edad en toda Colombia:\n{fallecidos}')
+
+
